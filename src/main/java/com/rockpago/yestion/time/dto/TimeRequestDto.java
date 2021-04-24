@@ -1,25 +1,25 @@
-package com.rockpago.yestion.inputtime.dto;
+package com.rockpago.yestion.time.dto;
 
-import com.rockpago.yestion.inputtime.domain.Spent;
+import com.rockpago.yestion.time.domain.Time;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class InputRequestDto {
+public class TimeRequestDto {
 
     private Long id;
     private int hours;
     private int minutes;
 
     @Builder
-    public InputRequestDto(Long id, int hours, int minutes) {
+    public TimeRequestDto(Long id, int hours, int minutes) {
         this.id = id;
         this.hours = hours;
         this.minutes = minutes;
     }
 
-    public Spent toEntity() {
-        return Spent.builder()
+    public Time toEntity() {
+        return Time.builder()
                 .id(id)
                 .hours(hours)
                 .minutes(minutes)
