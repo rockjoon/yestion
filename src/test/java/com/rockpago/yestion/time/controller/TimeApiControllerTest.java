@@ -1,8 +1,8 @@
-package com.rockpago.yestion.inputtime.controller;
+package com.rockpago.yestion.time.controller;
 
-import com.rockpago.yestion.inputtime.domain.InputRepository;
-import com.rockpago.yestion.inputtime.domain.Spent;
-import com.rockpago.yestion.inputtime.dto.InputRequestDto;
+import com.rockpago.yestion.time.domain.TimeRepository;
+import com.rockpago.yestion.time.domain.Time;
+import com.rockpago.yestion.time.dto.TimeRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class InputControllerTest {
+class TimeApiControllerTest {
 
     @LocalServerPort
     private int port;
@@ -27,24 +27,24 @@ class InputControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private InputRepository inputRepository;
+    private TimeRepository timeRepository;
 
     @AfterEach
     public void tearDown() throws Exception {
-        inputRepository.deleteAll();
+        timeRepository.deleteAll();
     }
 
-    @DisplayName("Spent 등록 확인")
+    @DisplayName("Time 등록 확인")
     @Test
     void saveTest() {
         int hours = 1;
         int minutes = 30;
-        InputRequestDto input = InputRequestDto.builder()
+        TimeRequestDto input = TimeRequestDto.builder()
                 .hours(hours)
                 .minutes(minutes)
                 .build();
 
-        String url = "http://localhost:" + port + "/spents";
+        String url = "http://localhost:" + port + "/times";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, input, Long.class);
@@ -53,11 +53,10 @@ class InputControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
-        List<Spent> list = inputRepository.findAll();
-        Spent resultSpent = list.get(0);
-        assertThat(resultSpent.getHours()).isEqualTo(hours);
-        assertThat(resultSpent.getMinutes()).isEqualTo(minutes);
-
+        List<Time> list = timeRepository.findAll();
+        Time resultTime = list.get(0);
+        assertThat(resultTime.getHours()).isEqualTo(hours);
+        assertThat(resultTime.getMinutes()).isEqualTo(minutes);
 
     }
 
