@@ -22,6 +22,7 @@ public class Time {
 
     private int hours;
 
+
     @Builder
     public Time(Long id, int minutes, int hours) {
         this.id = id;
