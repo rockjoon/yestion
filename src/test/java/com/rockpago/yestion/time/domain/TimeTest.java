@@ -1,5 +1,6 @@
 package com.rockpago.yestion.time.domain;
 
+import com.rockpago.yestion.time.entity.Time;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

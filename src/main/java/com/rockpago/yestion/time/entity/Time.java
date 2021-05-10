@@ -1,4 +1,4 @@
-package com.rockpago.yestion.time.domain;
+package com.rockpago.yestion.time.entity;
 
 import lombok.Builder;
 import lombok.Getter;

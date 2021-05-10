@@ -1,6 +1,6 @@
 package com.rockpago.yestion.time.service;
 
-import com.rockpago.yestion.time.domain.TimeRepository;
+import com.rockpago.yestion.time.entity.TimeRepository;
 import com.rockpago.yestion.time.dto.TimeRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

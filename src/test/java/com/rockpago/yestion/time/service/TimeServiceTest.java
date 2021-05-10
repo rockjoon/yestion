@@ -1,7 +1,7 @@
 package com.rockpago.yestion.time.service;
 
-import com.rockpago.yestion.time.domain.Time;
-import com.rockpago.yestion.time.domain.TimeRepository;
+import com.rockpago.yestion.time.entity.Time;
+import com.rockpago.yestion.time.entity.TimeRepository;
 import com.rockpago.yestion.time.dto.TimeRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

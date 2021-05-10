@@ -1,6 +1,6 @@
 package com.rockpago.yestion.time.dto;
 
-import com.rockpago.yestion.time.domain.Time;
+import com.rockpago.yestion.time.entity.Time;
 import lombok.Builder;
 import lombok.Getter;
 
