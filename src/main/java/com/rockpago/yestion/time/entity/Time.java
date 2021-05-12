@@ -18,16 +18,15 @@ public class Time {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int minutes;
+    private Integer minutes;
 
-    private int hours;
+    private Integer hours;
 
 
     @Builder
-    public Time(Long id, int minutes, int hours) {
+    public Time(Long id, Integer minutes, Integer hours) {
         this.id = id;
         this.minutes = minutes;
         this.hours = hours;
     }
-
 }
