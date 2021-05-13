@@ -3,10 +3,12 @@ package com.rockpago.yestion.time.controller;
 import com.rockpago.yestion.time.entity.TimeRepository;
 import com.rockpago.yestion.time.entity.Time;
 import com.rockpago.yestion.time.dto.TimeRequestDto;
+import com.rockpago.yestion.time.service.TimeService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -17,22 +19,15 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
+@AutoConfigureMockMvc
 class TimeApiControllerTest {
-
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private TestRestTemplate restTemplate;
 
     @Autowired
     private TimeRepository timeRepository;
 
-    @AfterEach
-    public void tearDown() throws Exception {
-        timeRepository.deleteAll();
-    }
+    @Autowired
+    private TimeService timeService;
 
     @DisplayName("Time 등록 확인")
     @Test
@@ -44,19 +39,10 @@ class TimeApiControllerTest {
                 .minutes(minutes)
                 .build();
 
-        String url = "http://localhost:" + port + "/times";
+        Long id = timeService.save(input);
 
-        //when
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, input, Long.class);
-
-        //then
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isGreaterThan(0L);
-
-        List<Time> list = timeRepository.findAll();
-        Time resultTime = list.get(0);
-        assertThat(resultTime.getHours()).isEqualTo(hours);
-        assertThat(resultTime.getMinutes()).isEqualTo(minutes);
+        Time time = timeRepository.findById(id).get();
+        assertThat(time.getHours()).isEqualTo(hours);
 
     }
 
