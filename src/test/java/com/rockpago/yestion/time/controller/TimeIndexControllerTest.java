@@ -23,7 +23,6 @@ class TimeIndexControllerTest {
     void timehome() throws Exception {
         mockMvc.perform(get("/timehome"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("YESTION")))
                 .andDo(print());
     }
 
